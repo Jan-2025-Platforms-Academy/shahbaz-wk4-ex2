@@ -6,11 +6,18 @@ terraform {
     }
   }
 
-  backend "s3" {}
+  backend "s3" {
+    bucket = "s3-shahbaz-tf-state"
+    key    = "shahbaz/terraform/state"
+    region = "eu-west-2"
+    profile = "AWSAdministratorAccess-841162714039"
+
+  }
 }
 
 provider "aws" {
   region = var.region
+  profile = "AWSAdministratorAccess-841162714039"
 }
 
 resource "aws_s3_bucket" "terraform_state" {
