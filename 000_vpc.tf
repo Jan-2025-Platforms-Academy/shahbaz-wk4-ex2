@@ -1,6 +1,4 @@
 
-# VPC and other components that attached to vpc (IGW, NATGW etc)
-
 resource "aws_vpc" "shahbaz_vpc" {
   cidr_block = var.vpc_cidr_block
 }
