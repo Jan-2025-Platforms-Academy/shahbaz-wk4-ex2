@@ -1,7 +1,7 @@
 resource "aws_instance" "web" {
   count         = 4
   ami           = "ami-0aa9ffd4190a83e11"
-  instance_type = "t2-micro"
+  instance_type = "t2.micro"
   subnet_id     = element([aws_subnet.private_subnet_1.id, aws_subnet.private_subnet_3.id], count.index)
   key_name      = var.key_name
   user_data     = <<-EOF
