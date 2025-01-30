@@ -49,7 +49,7 @@ resource "aws_s3_bucket_lifecycle_configuration" "terraform_state_lifecycle" {
       storage_class = "STANDARD_IA"
     }
     expiration {
-      days = 30
+      days = 60
     }
   }
 

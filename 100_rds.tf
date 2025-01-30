@@ -10,7 +10,7 @@ resource "aws_db_subnet_group" "this" {
 resource "aws_db_instance" "this" {
   allocated_storage      = 20
   engine                 = "mariadb"
-  instance_class         = "db.t2.micro"
+  instance_class         = "db.m5.large"
   db_name                = "sample"
   username               = "admin"
   password               = "1Password1"
