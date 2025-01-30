@@ -6,7 +6,7 @@ resource "aws_instance" "bastion" {
   key_name                    = var.key_name
 
   tags = {
-    Name = "shahbaz-astion"
+    Name = "shahbaz-bastion"
   }
   security_groups = [aws_security_group.bastion-sg.id]
 
