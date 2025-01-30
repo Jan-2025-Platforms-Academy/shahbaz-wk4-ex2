@@ -6,8 +6,14 @@ resource "aws_instance" "bastion" {
   key_name                    = var.key_name
 
   tags = {
-    Name = "Bastion"
+    Name = "shahbaz-astion"
   }
   security_groups = [aws_security_group.bastion-sg.id]
 
+}
+
+resource "aws_eip" "bastion_eip" {
+  domain     = "vpc"
+  instance   = aws_instance.bastion.id
+  depends_on = [aws_internet_gateway.this]
 }
