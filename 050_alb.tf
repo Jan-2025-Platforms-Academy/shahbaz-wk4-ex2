@@ -28,7 +28,7 @@ resource "aws_alb_listener" "http" {
 
   default_action {
     type = "redirect"
-
+    target_group_arn = aws_alb_target_group.this.arn
     redirect {
       port        = "443"
       protocol    = "HTTPS"
