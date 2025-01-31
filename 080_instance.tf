@@ -7,7 +7,7 @@ resource "aws_instance" "web" {
   user_data     = <<-EOF
         #!/bin/bash
         yum update -y
-        yum install -y httpd git php mariadb105
+        yum install -y httpd git php-mysqli mariadb105
         systemctl start httpd
         systemctl enable httpd
         chmod -R 755 /var/www
@@ -16,6 +16,10 @@ resource "aws_instance" "web" {
         echo "DB_USERNAME=admin" >> /etc/environment
         echo "DB_PASSWORD=1Password1" >> /etc/environment
         echo "DB_DATABASE=sample" >> /etc/environment
+
+        echo "INSTANCE_NAME=$(curl http://169.254.169.254/latest/meta-data/instance-id)" >> /etc/environment
+        echo "AVAILABILITY_ZONE=$(curl http://169.254.169.254/latest/meta-data/placement/availability-zone)" >> /etc/environment
+
         source /etc/environment
         
         git clone https://github.com/rearviewmirror/platform_academy.git /tmp/platform_academy
