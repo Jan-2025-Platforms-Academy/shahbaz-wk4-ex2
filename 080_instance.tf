@@ -17,11 +17,8 @@ resource "aws_instance" "web" {
         echo "DB_PASSWORD=1Password1" >> /etc/environment
         echo "DB_DATABASE=sample" >> /etc/environment
 
-        echo "INSTANCE_NAME=$(curl http://169.254.169.254/latest/meta-data/instance-id)" >> /etc/environment
-        echo "AVAILABILITY_ZONE=$(curl http://169.254.169.254/latest/meta-data/placement/availability-zone)" >> /etc/environment
-
         source /etc/environment
-        systemctl restart httpd
+        
         git clone https://github.com/rearviewmirror/platform_academy.git /tmp/platform_academy
         cp /tmp/platform_academy/db_connect.inc /var/www/html/db_connect.inc
         cp /tmp/platform_academy/index.php /var/www/html/index.php
