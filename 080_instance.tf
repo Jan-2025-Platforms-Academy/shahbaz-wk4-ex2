@@ -14,7 +14,7 @@ resource "aws_instance" "web" {
         git clone https://github.com/rearviewmirror/platform_academy.git /tmp/platform_academy
         cp /tmp/platform_academy/index.php /var/www/html/index.php
         
-        echo "DB_SERVER=$(echo ${aws_db_instance.this.endpoint} | sed 's/:3306//')" >> /etc/environment
+        echo "DB_SERVER=${aws_db_instance.this.address}" >> /etc/environment
         echo "DB_USERNAME=admin" >> /etc/environment
         echo "DB_PASSWORD=1Password1" >> /etc/environment
         echo "DB_DATABASE=sample" >> /etc/environment
