@@ -11,14 +11,16 @@ resource "aws_instance" "web" {
         systemctl start httpd
         systemctl enable httpd
         chmod -R 755 /var/www
-        git clone https://github.com/rearviewmirror/platform_academy.git /tmp/platform_academy
-        cp /tmp/platform_academy/index.php /var/www/html/index.php
-        
+
         echo "DB_SERVER=${aws_db_instance.this.address}" >> /etc/environment
         echo "DB_USERNAME=admin" >> /etc/environment
         echo "DB_PASSWORD=1Password1" >> /etc/environment
         echo "DB_DATABASE=sample" >> /etc/environment
         source /etc/environment
+        
+        git clone https://github.com/rearviewmirror/platform_academy.git /tmp/platform_academy
+        cp /tmp/platform_academy/db_connect.inc /var/www/html/db_connect.inc
+        cp /tmp/platform_academy/index.php /var/www/html/index.php
     EOF
 
   tags = {
