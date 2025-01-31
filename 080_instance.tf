@@ -7,7 +7,7 @@ resource "aws_instance" "web" {
   user_data     = <<-EOF
         #!/bin/bash
         yum update -y
-        yum install -y httpd git php-mysqli mariadb105
+        yum install -y httpd git php php-mysqli mariadb105
         systemctl start httpd
         systemctl enable httpd
         chmod -R 755 /var/www
@@ -21,7 +21,7 @@ resource "aws_instance" "web" {
         echo "AVAILABILITY_ZONE=$(curl http://169.254.169.254/latest/meta-data/placement/availability-zone)" >> /etc/environment
 
         source /etc/environment
-        
+        systemctl restart httpd
         git clone https://github.com/rearviewmirror/platform_academy.git /tmp/platform_academy
         cp /tmp/platform_academy/db_connect.inc /var/www/html/db_connect.inc
         cp /tmp/platform_academy/index.php /var/www/html/index.php
