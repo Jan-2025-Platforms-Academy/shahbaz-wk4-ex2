@@ -1,18 +1,22 @@
-variable "bucket_name" {
-  description = "The name of the S3 bucket"
-  type        = string
+variable "environment" {
+  description = "This is the value for the env"
+  type = string
+}
+
+variable "vpc_cidr_block" {
+  description = "VPC's cidr block"
+  type = string
+}
+
+variable "vpc_name" {
+    description = "The name of the VPC"
+    type = string
 }
 
 variable "region" {
   description = "The AWS region"
   type        = string
-  default     = "eu-west-2"
-}
-
-variable "environment" {
-  description = "This the env for the resource"
-  type        = string
-  default     = "dev-shahbaz"
+  default     = "eu-west-1"
 }
 
 variable "owner" {
@@ -21,15 +25,10 @@ variable "owner" {
   default     = "shahbaz"
 }
 
-variable "vpc_cidr_block" {
-  description = "VPC's CIDR block"
-  type        = string
-}
-
 variable "availability_zones" {
   description = "List of availability zones"
   type        = list(string)
-  default     = ["eu-west-2a", "eu-west-2b"]
+  default     = ["eu-west-1a", "eu-west-1b"]
 }
 
 variable "key_name" {
