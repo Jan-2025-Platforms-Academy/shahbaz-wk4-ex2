@@ -1,6 +1,9 @@
 resource "aws_instance" "web" {
-  count           = 2
-  ami             = "ami-0c55b159cbfafe1f0"
+  count = 2
+  # London 
+  # ami             = "ami-0c55b159cbfafe1f0"
+  # Ireland 
+  ami             = "ami-05edf2d87fdbd91c1"
   instance_type   = "t2.micro"
   key_name        = var.key_name
   security_groups = [aws_security_group.web-sg.id]
