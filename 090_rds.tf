@@ -16,6 +16,7 @@ resource "aws_db_instance" "this" {
   password               = "1Password1"
   db_subnet_group_name   = aws_db_subnet_group.this.name
   vpc_security_group_ids = [aws_security_group.db-sg.id]
+  skip_final_snapshot    = true
 
   multi_az            = true
   storage_type        = "gp2"
