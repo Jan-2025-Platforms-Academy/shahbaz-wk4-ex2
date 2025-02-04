@@ -19,7 +19,7 @@ resource "aws_subnet" "public_subnet_2" {
   tags = {
     Name = "shahbaz-public-subnet-2-ALB-${var.environment}"
   }
-  
+
 }
 
 

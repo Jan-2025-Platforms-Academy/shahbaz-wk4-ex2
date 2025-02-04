@@ -4,5 +4,5 @@ resource "aws_internet_gateway" "this" {
   tags = {
     Name = "shahbaz-igw-${var.environment}"
   }
-  
+
 }
