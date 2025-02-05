@@ -1,6 +1,7 @@
 
 provider "aws" {
-  region = "eu-west-1"
+  region  = "eu-west-1"
+  profile = "AWSAdministratorAccess-841162714039"
 }
 
 // Include IAM roles and policies
@@ -10,18 +11,18 @@ module "iam_roles" {
 
 // Include CodeBuild projects
 module "codebuild_dev" {
-  source = "./codebuild_dev"
+  source             = "./codebuild_dev"
   codebuild_role_arn = module.iam_roles.codebuild_role_arn
 }
 
 module "codebuild_prod" {
-  source = "./codebuild_prod"
+  source             = "./codebuild_prod"
   codebuild_role_arn = module.iam_roles.codebuild_role_arn
 }
 
 // Include CodePipeline
 module "codepipeline" {
-  source = "./codepipeline"
+  source                = "./codepipeline"
   codepipeline_role_arn = module.iam_roles.codepipeline_role_arn
   dev_project_name      = module.codebuild_dev.dev_project_name
   prod_project_name     = module.codebuild_prod.prod_project_name
@@ -30,12 +31,6 @@ module "codepipeline" {
 // S3 bucket for artifacts
 resource "aws_s3_bucket" "artifact_bucket" {
   bucket = "shahbaz-eu-west-1-build-artifact"
-}
-
-// S3 bucket ACL
-resource "aws_s3_bucket_acl" "artifact_bucket_acl" {
-  bucket = aws_s3_bucket.artifact_bucket.id
-  acl    = "private"
 }
 
 // S3 bucket public access block
