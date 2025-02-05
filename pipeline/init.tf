@@ -1,25 +1,25 @@
 
-provider "aws"{
+provider "aws" {
   region = "eu-west-1"
 }
 
 // Include IAM roles and policies
 module "iam_roles" {
-  source = "./aa_iam_ci.tf"
+  source = "./10_iam.tf"
 }
 
 // Include CodeBuild projects
 module "codebuild_dev" {
-  source = "./bb_codebuild_dev.tf"
+  source = "./20_codebuild_dev.tf"
 }
 
 module "codebuild_prod" {
-  source = "./cc_codebuild_prod.tf"
+  source = "./30_codebuild_prod.tf"
 }
 
 // Include CodePipeline
 module "codepipeline" {
-  source = "./dd_codepipeline.tf"
+  source = "./40_codepipeline.tf"
 }
 
 // S3 bucket for artifacts

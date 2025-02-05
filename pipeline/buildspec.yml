@@ -9,9 +9,8 @@ phases:
       - echo "Starting Terraform ${TF_ACTION} for ${ENVIRONMENT} environment"
   build:
     commands:
-      - ./tf-${TF_ACTION}.sh ${ENVIRONMENT}
+      - ../tf-${TF_ACTION}.sh ${ENVIRONMENT}
 artifacts:
   files:
     - '**/*'
   discard-paths: yes
-  
