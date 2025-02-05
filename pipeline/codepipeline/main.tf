@@ -1,6 +1,6 @@
 resource "aws_codepipeline" "this" {
   name     = "shahbaz-project-codepipeline"
-  role_arn = aws_iam_role.codepipeline_role.arn
+  role_arn = var.codepipeline_role_arn
 
   artifact_store {
     location = "shahbaz-eu-west-1-build-artifact" # hardcoded will use var later
@@ -37,7 +37,7 @@ resource "aws_codepipeline" "this" {
       input_artifacts = ["source_output"]
       output_artifacts = ["plan_dev_output"]
       configuration = {
-        ProjectName = aws_codebuild_project.dev.name
+        ProjectName = var.dev_project_name
       }
     }
   }
@@ -68,7 +68,7 @@ stage {
       version         = "1"
       input_artifacts = ["plan_dev_output"]
       configuration = {
-        ProjectName = aws_codebuild_project.dev.name
+        ProjectName = var.dev_project_name
       }
     }
   }
@@ -85,7 +85,7 @@ stage {
       input_artifacts = ["source_output"]
       output_artifacts = ["plan_prod_output"]
       configuration = {
-        ProjectName = aws_codebuild_project.prod.name
+        ProjectName = var.prod_project_name
       }
     }
   }
@@ -116,7 +116,7 @@ stage {
       version         = "1"
       input_artifacts = ["plan_prod_output"]
       configuration = {
-        ProjectName = aws_codebuild_project.prod.name
+        ProjectName = var.prod_project_name
       }
     }
   }
