@@ -5,21 +5,26 @@ provider "aws" {
 
 // Include IAM roles and policies
 module "iam_roles" {
-  source = "./10_iam.tf"
+  source = "./iam"
 }
 
 // Include CodeBuild projects
 module "codebuild_dev" {
-  source = "./20_codebuild_dev.tf"
+  source = "./codebuild_dev"
+  codebuild_role_arn = module.iam_roles.codebuild_role_arn
 }
 
 module "codebuild_prod" {
-  source = "./30_codebuild_prod.tf"
+  source = "./codebuild_prod"
+  codebuild_role_arn = module.iam_roles.codebuild_role_arn
 }
 
 // Include CodePipeline
 module "codepipeline" {
-  source = "./40_codepipeline.tf"
+  source = "./codepipeline"
+  codepipeline_role_arn = module.iam_roles.codepipeline_role_arn
+  dev_project_name      = module.codebuild_dev.dev_project_name
+  prod_project_name     = module.codebuild_prod.prod_project_name
 }
 
 // S3 bucket for artifacts
