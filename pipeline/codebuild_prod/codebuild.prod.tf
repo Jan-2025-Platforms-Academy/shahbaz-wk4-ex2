@@ -4,7 +4,7 @@ resource "aws_codebuild_project" "prod" {
   source {
     type      = "GITHUB"
     location  = "https://github.com/Jan-2025-Platforms-Academy/shahbaz-wk4-ex2"
-    buildspec = "../buildspec.yml"
+    buildspec = "buildspec.yml"
   }
   environment {
     compute_type                = "BUILD_GENERAL1_SMALL"

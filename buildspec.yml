@@ -1,0 +1,27 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.8
+  pre_build:
+    commands:
+      - echo "Starting Terraform ${TF_ACTION} for ${ENVIRONMENT} environment"
+      - curl -o terraform.zip https://releases.hashicorp.com/terraform/0.12.29/terraform_0.12.29_linux_amd64.zip
+      - unzip terraform.zip
+      - mv terraform /usr/local/bin/
+      - rm terraform.zip
+      - terraform --version
+  build:
+    commands:
+      - echo "Running Terraform ${TF_ACTION} for ${ENVIRONMENT} environment"
+      - terraform init
+      - terraform validate
+      - terraform fmt -check
+      - terraform plan -var-file=dev/dev.tfvars
+    #  - ../tf-${TF_ACTION}.sh ${ENVIRONMENT}
+    
+artifacts:
+  files:
+    - '**/*'
+  discard-paths: yes
