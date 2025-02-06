@@ -9,6 +9,7 @@ phases:
       - echo "Starting Terraform ${TF_ACTION} for ${ENVIRONMENT} environment"
   build:
     commands:
+      - pwd
       - ../tf-${TF_ACTION}.sh ${ENVIRONMENT}
 artifacts:
   files:

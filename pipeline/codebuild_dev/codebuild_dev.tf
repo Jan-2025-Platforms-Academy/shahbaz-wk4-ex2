@@ -1,10 +1,10 @@
 resource "aws_codebuild_project" "dev" {
-    name = "shahbaz-dev-plan"
+    name = "shahbaz-dev-deploy"
     service_role = var.codebuild_role_arn
     source {
       type = "GITHUB"
       location = "https://github.com/Jan-2025-Platforms-Academy/shahbaz-wk4-ex2"
-      buildspec = "../buildspec.yml"
+      buildspec = "pipeline/buildspec.yml"
     }
     environment {
         compute_type = "BUILD_GENERAL1_SMALL"

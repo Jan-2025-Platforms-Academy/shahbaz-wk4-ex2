@@ -1,5 +1,5 @@
 resource "aws_codebuild_project" "prod" {
-    name          = "shahbaz-prod-plan"
+    name          = "shahbaz-prod-deploy"
   service_role  = var.codebuild_role_arn
   source {
     type      = "GITHUB"
