@@ -38,9 +38,10 @@ resource "aws_iam_role_policy" "codebuild_s3_policy" {
         "Action": [
         "s3:GetObject",
         "s3:PutObject",
-        "s3:PutObjectAcl"
+        "s3:PutObjectAcl",
+        "s3:ListBucket"
         ],
-        "Resource": "arn:aws:s3:::shahbaz-eu-west-1-build-artifact/shahbaz-dev-codepipe/source_out/*"
+        "Resource": "arn:aws:s3:::shahbaz-eu-west-1-build-artifact/*"
       }
     ]
   }
